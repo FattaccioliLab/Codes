@@ -11,9 +11,15 @@ from numpy import *
 
 
 ##Importer les images
+##Import all the pictures to analyze
 
-os.getcwd () # Donne le répertoire de travail
-os.chdir("/Users/ClotildeVie/Documents/Images") # charge le répertoire # Ne pas oublier les guillemets
+# Donne le répertoire de travail
+# Get working directory
+os.getcwd () 
+
+# Charge le répertoire # Ne pas oublier les guillemets
+# Change directory to the one containing the pictures
+os.chdir("/Users/ClotildeVie/Documents/Images") 
 
 
 #Ouvrir une image en noir et blanc
@@ -27,7 +33,8 @@ image = io.imread('image.png')
 plt.imshow(goutte0[: ,: ,:])
 plt.show()
 
-## Expérience 1
+## Load all the pictures corresponding to one experiment
+## Each image corresponds to a droplet
 
 g11 = io.imread('g11.png', 'L')
 g22 = io.imread('g22.png', 'L')
