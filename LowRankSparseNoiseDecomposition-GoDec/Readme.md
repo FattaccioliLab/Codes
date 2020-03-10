@@ -37,21 +37,14 @@ The output will be 4 TIFF stacks :
 
 The function takes the following arguments : 
 
-Namefile : path of the .avi movie or TIFF stack
-
-rank : rank(L)<=rank
-
-tau : soft thresholding
-
-tol : error tolerance
-
-power: >=0, power scheme modification, increasing it lead to better accuracy and more time cost
-
-k : rank stepsize
-
-dynamicrange : grayscale depth (8 or 16) of the output TIFF files
-
-length : the number of frames on which to run the routine.
+- Namefile : path of the .avi movie or TIFF stack
+- rank : rank(L)<=rank
+- tau : soft thresholding
+- tol : error tolerance
+- power: >=0, power scheme modification, increasing it lead to better accuracy and more time cost
+- k : rank stepsize
+- dynamicrange : grayscale depth (8 or 16) of the output TIFF files
+- length : the number of frames on which to run the routine.
 
 rank, tau, power, tol and k are parameters coming from the code of Zhou and Tao.
 
@@ -71,14 +64,15 @@ Tianyi Zhou and Dacheng Tao, "GoDec: Randomized Lo-rank & Sparse Matrix Decompos
 
 Tianyi Zhou and Dacheng Tao, "Greedy Bilateral Sketch, Completion and  Smoothing", AISTATS 2013.
 
-Python Implementation : J. Fattaccioli (Department of Chemisrty, ENS)
+Python Implementation : J. Fattaccioli (Department of Chemistry, ENS)
+
 Date : March 2020
 
 Requirements : 
 
-Python==3.7.5
-scipy==1.3.1
-scikit_image==0.15.0
-numpy==1.17.3
-PyWavelets==1.0.3
+- Python==3.7.5
+- scipy==1.3.1
+- scikit_image==0.15.0
+- numpy==1.17.3
+- PyWavelets==1.0.3
 
