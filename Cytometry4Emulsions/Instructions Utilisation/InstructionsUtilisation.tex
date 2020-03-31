@@ -1,0 +1,160 @@
+\documentclass[a4paper,11pt]{article}
+
+% -------------------------------------------------
+% this is matlab facs routines instruction source code
+% needs LaTeX2e
+% writen in 2005
+% -------------------------------------------------
+% MAIN DOCUMENT FOR GLOBAL COMPILATION
+% -------------------------------------------------
+% package list
+% -------------------------------------------------
+\usepackage{a4}
+\usepackage[pdftex]{graphicx,color}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+%\renewcommand{\chaptermark}[1]{%
+%\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+
+\usepackage{lmodern}
+\usepackage[francais]{layout}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage{float}
+\usepackage{calc}
+\usepackage{picins, floatflt}
+\usepackage[normal]{subfigure}
+\usepackage{natbib}
+\usepackage{geometry}
+\geometry{hmargin=2cm,offset=0cm}
+%-----------
+%accents in french
+%for use with WinEdt and MikTeX, uncomment the following line
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%-----------
+%for use with TeXShop and teTeX on Mac OSX, uncomment the following line
+% or for use under the same operating system with teTeX and iTeXMac
+%\usepackage[applemac]{inputenc}
+% -------------------------------------------------
+% new command definitions
+% -------------------------------------------------
+\newcommand{\ie}{c'est-ˆ-dire }
+\newcommand{\rs}{di6-ASPBS (560 $\mu$M dans EtOH) }
+\newcommand{\ntani}{DOGS-NTA(Ni) }
+\newcommand{\nta}{DOGS-NTA }
+\newcommand{\dsp}{DSPE-PEG$_{2000}$ }
+\newcommand{\dop}{DOPE-PEG$_{2000}$ }
+\newcommand{\is}{{\it \ in situ} }
+\newcommand{\ap}{{\it \ a priori} }
+\newcommand{\PBT}{{Phosphate/Tween20}}
+\newcommand{\PBF}{{Phosphate/F127}}
+\newcommand{\peg}{polyéthylène glycol }
+\newcommand{\peo}{polyéthylène oxyde }
+\newcommand{\pegbiot}[1][]{PEG-Biotine-#1}
+\newcommand{\MT}{{MES/Tween20}}
+\newcommand{\pcm}{\%_{m/m}}
+\newcommand{\pcv}{\%_{v/v}}
+\newcommand{\uM}{$\mu$M }
+\newcommand{\uL}{$\mu$L }
+\newcommand{\um}{$\mu$m }
+\newcommand{\gm}{g/mol }
+\newcommand{\ds}{\displaystyle }
+\newcommand{\etal}{{\it et al.}}
+\newcommand{\oeuvre}{{\oe}uvre}
+
+
+% -------------------------------------------------
+% counters
+% -------------------------------------------------
+\addtocounter{secnumdepth}{1}
+\renewcommand{\thesubsubsection}{\thesubsection.\alph{subsubsection}}
+\newcommand{\soussection}[1]{$\star$ \textbf{#1}}
+% compilation
+\newcounter{hours}\newcounter{minutes}
+\newcommand{\printtime}{%
+\setcounter{hours}{\time/60}%
+\setcounter{minutes}{\time-\value{hours}*60}%
+\thehours :\theminutes}
+
+% Profondeur de \subsubsection = 3
+\setcounter{tocdepth}{3}     % Dans la table des matieres
+\setcounter{secnumdepth}{3}  % Avec un numero.
+
+%--------------------------------------------------
+%Redéfinition des marges
+%--------------------------------------------------
+\topmargin=0mm \evensidemargin=0mm \oddsidemargin=0mm \textwidth=170mm \textheight=220mm
+\footskip=10mm \addtolength{\headsep}{25pt} \textwidth=160mm \lhead[\fancyplain{}{\leftmark}]{}
+\chead{} \rhead[]{\fancyplain{}{\rightmark}} \cfoot{\thepage} \rfoot{\today{} \printtime} \lfoot{}
+
+%--------------------------------------------------
+%Titre / Auteur
+%--------------------------------------------------
+\title{Mode d'emploi des routines matlab pour l'utilisation des fichiers du FACS}
+\author{Jacques FATTACCIOLI}
+\date{ }
+
+%---------------------------------------------------
+% BEGIN
+%---------------------------------------------------
+
+\begin{document}
+\pagestyle{fancy}
+\parindent=0mm
+\maketitle
+
+\section{Types de fichiers de mesure à exporter du logiciel CellQuest Pro}
+
+Le logiciel CellQuest Pro obéit à la norme de données de cytométrie FCS 2.0, qui code les valeurs
+de fluorescence et de diffusion sur 1024 niveaux. Le protocole de récupération des fichiers est le
+suivant :
+\begin{description}
+  \item[Exportation]  On convertit les données natives du logiciel en fichiers texte d'extension .RTT à l'aide du shareware
+  FACSXXX sous MacOS
+  9.
+  \item[Conversion des extensions] Après avoir importé le dossier de mesure sur le disque dur de la
+  station windows, on crée un répertoire repertoiredesdonnées/converti à l'interieur dans lequel on copie tout les
+  fichiers .RTT qui serviront à l'étude. On les renommme manuellement ou avec un logiciel de type \emph{File Renamer} de
+  manière à ce que les extensions soient en \textbf{.txt}
+\end{description}
+
+
+\section{Copie des fichiers nécessaire aux routines aux calculs}
+
+Pour mener à bien toutes les étapes ultérieures, il est nécessaire de copier dans le répertoire qui
+contient les données en \emph{.txt} une série de fichiers (cf. Fig. \ref{donneesimperatives}) :
+
+\begin{figure}[!htb]
+\centering
+  \includegraphics[width=0.8\textwidth]{donneesimperatives.pdf}\\
+  \caption{Les fichiers à déplacer et copier sont entourés en rouge}\label{donneesimperatives}
+\end{figure}
+
+
+\begin{enumerate}
+  \item Le repertoire \textbf{donneesimperatives} qui contient les fichiers de référence :
+    \begin{description}
+      \item[parametres.txt] c'est le fichier qui stocke les noms des paramètres mesurés par le
+      FACS,
+      \item[rayon.txt] est le fichier qui stocke la série de rayons (en nm) qui a servie à calculer
+      la simulation de la courbe de mesure stockée dans le fichier suivant :
+      \item[theory.txt] est le fichier ou sont stockés les paramètres FS, SS et rayon (nm)
+      calculés par la routine de simulation de Mie,
+      \item[quantitation.txt] contient les valeurs en équivalents fluoréscéine des billes Bangs Quantum FITC et les valeurs
+      d'intensité de fluorescence (sur 1024 canaux) qui permettent d'obtenir la droite de
+      calibration de la fluorescence des objets.
+    \end{description}
+  \item les fichiers \textbf{SuppressionPoints.fig} et \textbf{SuppressionPoints.m} qui
+  contiennent le code de la routine graphique permettant de supprimer des points sur les dotplots.
+  \item les fichiers \textbf{TraitementdesDonnees.fig} et \textbf{TraitementdesDonnees.m} qui
+  permettent d'extraire la fréquence des rayons qui servira à construire l'histogramme des tailles,
+  et les données de la courbe fluorescence en fonction du rayon.
+\end{enumerate}
+
+
+
+\end{document}

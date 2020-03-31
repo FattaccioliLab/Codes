@@ -1,0 +1,121 @@
+\documentclass[a4paper,11pt]{book}
+
+% -------------------------------------------------
+% this is jak thesis source code
+% needs LaTeX2e
+% writen in 2005
+% -------------------------------------------------
+% MAIN DOCUMENT FOR GLOBAL COMPILATION
+% -------------------------------------------------
+% package list
+% -------------------------------------------------
+\usepackage{a4}
+\usepackage{graphicx,color}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+
+\usepackage{lmodern}
+\usepackage[francais]{layout}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage{float}
+\usepackage{calc}
+\usepackage{picins, floatflt}
+\usepackage[normal]{subfigure}
+\usepackage{natbib}
+\usepackage{geometry}
+   \geometry{hmargin=2cm,offset=0cm}
+%-----------
+%accents in french
+%for use with WinEdt and MikTeX, uncomment the following line
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%-----------
+%for use with TeXShop and teTeX on Mac OSX, uncomment the following line
+% or for use under the same operating system with teTeX and iTeXMac
+%\usepackage[applemac]{inputenc}
+% -------------------------------------------------
+% new command definitions
+% -------------------------------------------------
+\newcommand{\ie}{c'est-ˆ-dire }
+\newcommand{\rs}{di6-ASPBS (560 $\mu$M dans EtOH) }
+\newcommand{\ntani}{DOGS-NTA(Ni) }
+\newcommand{\nta}{DOGS-NTA }
+\newcommand{\dsp}{DSPE-PEG$_{2000}$ }
+\newcommand{\dop}{DOPE-PEG$_{2000}$ }
+\newcommand{\is}{{\it \ in situ} }
+\newcommand{\ap}{{\it \ a priori} }
+\newcommand{\PBT}{{Phosphate/Tween20}}
+\newcommand{\PBF}{{Phosphate/F127}}
+\newcommand{\peg}{polyéthylène glycol }
+\newcommand{\peo}{polyéthylène oxyde }
+\newcommand{\pegbiot}[1][]{PEG-Biotine-#1}
+\newcommand{\MT}{{MES/Tween20}}
+\newcommand{\pcm}{\%_{m/m}}
+\newcommand{\pcv}{\%_{v/v}}
+\newcommand{\uM}{$\mu$M }
+\newcommand{\uL}{$\mu$L }
+\newcommand{\um}{$\mu$m }
+\newcommand{\gm}{g/mol }
+\newcommand{\ds}{\displaystyle }
+\newcommand{\etal}{{\it et al.}}
+\newcommand{\oeuvre}{{\oe}uvre}
+
+
+% -------------------------------------------------
+% counters
+% -------------------------------------------------
+\addtocounter{secnumdepth}{1}
+\renewcommand{\thesubsubsection}{\thesubsection.\alph{subsubsection}}
+\newcommand{\soussection}[1]{$\star$ \textbf{#1}}
+% compilation
+\newcounter{hours}\newcounter{minutes}
+\newcommand{\printtime}{%
+\setcounter{hours}{\time/60}%
+\setcounter{minutes}{\time-\value{hours}*60}%
+\thehours :\theminutes}
+
+% Profondeur de \subsubsection = 3
+\setcounter{tocdepth}{3}     % Dans la table des matieres
+\setcounter{secnumdepth}{3}  % Avec un numero.
+%--------------------------------------------------
+%Redéfinition des marges
+%--------------------------------------------------
+
+
+\topmargin=0mm \evensidemargin=0mm \oddsidemargin=0mm \textwidth=170mm \textheight=220mm
+\footskip=10mm \addtolength{\headsep}{25pt} \textwidth=160mm \lhead[\fancyplain{}{\leftmark}]{}
+\chead{} \rhead[]{\fancyplain{}{\rightmark}} \cfoot{\thepage} \rfoot{\today{} \printtime} \lfoot{}
+
+%---------------------------------------------------
+% BEGIN
+%---------------------------------------------------
+
+\begin{document}
+\pagestyle{fancy}
+\parindent=0mm
+\tableofcontents
+
+%Permet de faire apparaître les noms des marges et leurs dimensions
+%\layout
+
+\include{D:/Laboratoire/These/introduction}
+\include{D:/Laboratoire/These/Partie_Biblio_Adhesion/adhesion}
+\include{D:/Laboratoire/These/Partie_Emulsions/Emulsions}
+\include{D:/Laboratoire/These/Partie_Proteines/proteinesetgreffage}
+\include{D:/Laboratoire/These/Partie_Fonctionnalisation/fonctionnalisation}
+\include{D:/Laboratoire/These/Partie_FACS/facs}
+\include{D:/Laboratoire/These/Partie_Mouillage_Theorie/mouillage_theorie}
+\include{D:/Laboratoire/These/Partie_Techniques_Experimentales/presentationmanipe}
+\include{D:/Laboratoire/These/Annexes/annexes}
+
+\listoffigures  % table des figures
+\listoftables   % table des tableaux
+
+\end{document}
