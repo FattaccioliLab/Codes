@@ -2,4 +2,4 @@
 import GreGoDec
 
 if __name__ == "__main__":
-    GreGoDec.DecomposeGoDec("examples/1-Original.tif")
+    GreGoDec.DecomposeGoDec("Samples/1-Original.tif")
