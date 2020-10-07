@@ -1,11 +1,11 @@
+# Low Rank Sparse Noise Decomposition - GoDec
 
+## Description
 
-
-
-This is the Python 3.7 traduction of the AISTATS 2013 GreBsmo code (Zhou and Tao) available here in its Matlab version : 
+This is the Python 3.7 traduction of the AISTATS 2013 GreBsmo code (Zhou and Tao) available here in its Matlab version :
 https://tianyizhou.wordpress.com/2014/05/23/aistats-2013-grebsmo-code-is-released/
 
-More details about the code : 
+More details about the code :
 https://nuit-blanche.blogspot.com/2014/07/grebsmo-greedy-bilateral-sketch.html
 
 Our Python version can take 8bit or 16bit TIFF stacks as inputs, and more common .avi movies.
@@ -17,15 +17,44 @@ The RGB .avi are converted in grayscale.
 
 - GreGoDec.py contains all the functions necessary to perform the LRSE decomposition.
 
-- requirements.txt summarizes the libraries used and their version
+- [requirements.txt](./requirements.txt) summarizes the libraries used and their version
 
-## Instructions of use
+## Installation
 
-Execute the function : 
+### With pipenv
 
+In order to separate the project's dependencies from the ones installed on your computer, it is recommended to use [pipenv](https://pipenv.pypa.io/en/latest/) to install the dependencies.
+
+~~~bash
+git clone https://github.com/FattaccioliLab/Codes
+cd Codes/LowRankSparseNoiseDecomposition-GoDec
+pipenv sync
+~~~
+
+This will install the dependencies specified in the `Pipfile.lock` file. You'll need to have python 3.7 installed on your computer.
+
+### With pip (not recommended)
+
+~~~bash
+pip install --user -r requirements.txt
+~~~
+
+## Usage
+
+~~~bash
+# with pipenv
+pipenv run python run-example.py
+# with pip
+python3.7 run-example.py
+~~~
+
+Execute the function:
+
+~~~python
 DecomposeGoDec(NameFile, rank = 3, power = 5, tau= 7, tol= 0.001, k = 2, dynamicrange = 8, length = 0)
+~~~
 
-The output will be 4 TIFF stacks : 
+The output will be 4 TIFF stacks :
 
 - 1-Original.tif : the original TIFF stack or the B/W TIFF version of the .avi movie
 
@@ -35,7 +64,7 @@ The output will be 4 TIFF stacks :
 
 - 4-Noise.tif : the Noise component TIFF file, containing the noisy data from the input movie
 
-The function takes the following arguments : 
+The function takes the following arguments :
 
 - Namefile : path of the .avi movie or TIFF stack
 - rank : rank(L)<=rank
@@ -50,13 +79,13 @@ rank, tau, power, tol and k are parameters coming from the code of Zhou and Tao.
 
 ## Simple version
 
-> Execute DecomposeGoDec(NameFile)
+> Execute DecomposeGoDec(filename: str)
 
 In this case, the routine works with defaults values (rank = 3, power = 5, tau= 7, tol= 0.001, k = 2, dynamicrange = 8) and all the frames of the stack are considered. The decomposition can be pretty slow if the frame number is > 10^3
 
-> Execute DecomposeGoDec(NameFile, length=int)
+> Execute DecomposeGoDec(filename: str, max_frames: int)
 
-In this case, the routine works also with defaults values (rank = 3, power = 5, tau= 7, tol= 0.001, k = 2, dynamicrange = 8) but on the length=int first frames of the movie
+In this case, the routine works also with defaults values (rank = 3, power = 5, tau= 7, tol= 0.001, k = 2, dynamicrange = 8) but on the max_frames (int) first frames of the movie
 
 ## REFERENCE
 
@@ -64,15 +93,13 @@ Tianyi Zhou and Dacheng Tao, "GoDec: Randomized Lo-rank & Sparse Matrix Decompos
 
 Tianyi Zhou and Dacheng Tao, "Greedy Bilateral Sketch, Completion and  Smoothing", AISTATS 2013.
 
-Python Implementation : J. Fattaccioli (Department of Chemistry, ENS)
+Python Implementation: J. Fattaccioli (Department of Chemistry, ENS)
 
-Date : March 2020
+Date: March 2020
 
-Requirements : 
+## Reminders
 
-- Python==3.7.5
-- scipy==1.3.1
-- scikit_image==0.15.0
-- numpy==1.17.3
-- PyWavelets==1.0.3
-
+~~~bash
+# generate requirements.txt from Pipfile.lock
+pipenv lock --requirement > requirements.txt
+~~~
