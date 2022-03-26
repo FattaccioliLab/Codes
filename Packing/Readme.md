@@ -7,3 +7,7 @@ This code need the following packages:
 . dccp : https://github.com/cvxgrp/dccp
 
 Please don't forget to add and/or activate a new environment.
+
+The syntax has been updated for a Python 3.X environment.
+J. Fattaccioli, R. Dreyfus
+Oct. 31, 2020
