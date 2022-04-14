@@ -1,0 +1,7 @@
+./Ch2-1-driftcorrected.txt
+./Ch2-2.txt
+./Ch2-3.txt
+./Ch2-4.txt
+./Ch2-5.txt
+./Ch2-6.txt
+./Ch2-7.txt
